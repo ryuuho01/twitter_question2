@@ -1,17 +1,20 @@
 <template>
-  <div class="login">
-    <label>
-      メールアドレス： <input v-model="email" type="email" required />
-    </label>
-    <br />
-    <label>
-      パスワード： <input v-model="password" type="password" required />
-    </label>
-    <br />
-    <button @click="login">ログイン</button>
-    <br />
-    <NuxtLink to="/">戻る</NuxtLink>
-  </div>
+  <body>
+    <div class="window">
+      <p><strong>ログイン</strong></p>
+      <div class="login">
+        <input v-model="email" type="email" value="" placeholder="メールアドレス" required />
+        <br />
+      </div>
+      <div class="login">
+        <input v-model="password" type="password" value="" placeholder="パスワード" required />
+        <br />
+      </div>
+      <div class="login">
+        <button @click="login">ログイン</button>
+      </div>
+    </div>
+  </body>
 </template>
 
 
@@ -35,19 +38,19 @@ export default {
         .signInWithEmailAndPassword(this.email, this.password)
         .then(() => {
           alert('ログインが完了しました')
-          this.$router.push('/')
+          this.$router.push('/mypage')
         })
         .catch((error) => {
           switch (error.code) {
             case 'auth/invalid-email':
               alert('メールアドレスの形式が違います。')
               break
-            case 'auth/user-disabled':
-              alert('ユーザーが無効になっています。')
-              break
-            case 'auth/user-not-found':
-              alert('ユーザーが存在しません。')
-              break
+            // case 'auth/user-disabled':
+            //   alert('ユーザーが無効になっています。')
+            //   break
+            // case 'auth/user-not-found':
+            //   alert('ユーザーが存在しません。')
+            //   break
             case 'auth/wrong-password':
               alert('パスワードが間違っております。')
               break
@@ -60,3 +63,11 @@ export default {
   },
 }
 </script>
+
+<style>
+
+.login {
+  margin: 10px 0;
+}
+
+</style>
